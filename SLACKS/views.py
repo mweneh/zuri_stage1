@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 def get_info(request):
     slack_name = request.GET.get('slack_name', '')
-    track = request.GET.get('track')
+    track = request.GET.get('track', '')
 
     current_day = datetime.now().strftime('%A')
     utc_time = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
