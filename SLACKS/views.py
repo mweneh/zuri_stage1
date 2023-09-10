@@ -7,7 +7,7 @@ def get_info(request):
     track = request.GET.get('track')
 
     current_day = datetime.now().strftime('%A')
-    utc_time = datetime.now().strftime('%Y-%m-%dT %H:%M:%')
+    utc_time = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
     current_utc_time = datetime.strptime(utc_time, '%Y-%m-%dT%H:%M:%SZ')
     delta = timedelta(hours=2)
@@ -16,7 +16,7 @@ def get_info(request):
     valid_utc_time = min_utc_time <= current_utc_time <= max_utc_time
 
     if not valid_utc_time:
-        return JsonResponse({'erro': 'invalid UTC time'},status=400)
+        return JsonResponse({'error': 'invalid UTC time'},status=400)
     
     github_file_url = "https://github.com/username/repo/blob/main/file_name.ext"
     github_repo_url = "https://github.com/username/repo"
